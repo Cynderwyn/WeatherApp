@@ -3,7 +3,7 @@ package com.example.whichweather;
 import android.app.Activity;
 import android.content.SharedPreferences;
 
-//Klass för att hantera behandling av vald stad
+//Class for handeling the chosen location/city
 public class CityPreference {
 
     SharedPreferences prefs;
