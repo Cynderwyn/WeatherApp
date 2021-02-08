@@ -19,7 +19,7 @@ public class WeatherHttpClient {
         InputStream inputStream = null;
 
         try {
-            //Koppling till current weather url från openweathermap
+            //Connection to the current weather URL from OpenWeatherMap
             String weatherURL = BASE_URL + location + "&appid=" + APPID;
             connection = (HttpURLConnection) (new URL(weatherURL)).openConnection();
 
@@ -28,7 +28,7 @@ public class WeatherHttpClient {
             connection.setDoOutput(true);
             connection.connect();
 
-            //Läser svaret, reads the response
+            //Reads the response
             StringBuffer buffer = new StringBuffer();
             inputStream = connection.getInputStream();
 
@@ -63,7 +63,7 @@ public class WeatherHttpClient {
 
         try {
 
-            //Koppling till forcast 5 day/3 hour url från openweathermap
+            //Conncetion to the forecast 5 day/3 hour URL from OpenWeatherMap
             String forecastURL = FORECAST_BASE_URL + location + "&appid=" + APPID;
             System.out.println(forecastURL);
             connection = (HttpURLConnection) (new URL(forecastURL)).openConnection();
@@ -73,7 +73,7 @@ public class WeatherHttpClient {
 
             connection.connect();
 
-            //Läser svaret, reads the response
+            //Reads the response
             StringBuffer buffer = new StringBuffer();
             inputStream = connection.getInputStream();
 
