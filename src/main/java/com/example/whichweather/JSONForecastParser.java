@@ -13,23 +13,23 @@ import java.util.Locale;
 
 public class JSONForecastParser {
 
-    //Tar in JSON-datan och parsar den för att sedan lägga in den i en lista av klassen Forecast
+    //Gets the JSON data and parses it to add it in a list of the class Forecast
     public static ArrayList<Forecast> getForecast(String data) throws JSONException {
         Forecast forecast = new Forecast();
         ArrayList<Forecast> forecasts = new ArrayList<>();
 
-        //Skapar upp ett JSON-Objekt från datan
+        //Creates a JSON object from the data
         JSONObject jsonObject = new JSONObject(data);
 
-        //Tar in informationen, en array
+        //Gets the information, an array
         JSONArray jsonArray = jsonObject.getJSONArray("list");
 
-        //Skapar upp en ny forecast för varje element
+        //Creates a new forecast for each element
         for (int i = 0; i < jsonArray.length(); i++) {
 
             forecast = new Forecast();
 
-            //Jag tar bara in och använder mig av första värdet
+            //I only get and use the first value
             JSONObject JSONForecast = jsonArray.getJSONObject(i);
 
             //Time and Date
@@ -49,15 +49,14 @@ public class JSONForecastParser {
             JSONObject JSONWeather = jsonWeatherArray.getJSONObject(0);
             forecast.forecastCondition.setIcon(getString("icon", JSONWeather));
 
-            //lagrar en forecast i listan
+            //stores a forecast in the list
             forecasts.add(forecast);
         }
-        //returnerar en lista av prognosdata
+        //returns a list of the forecast data
         return forecastDate(forecasts);
     }
 
-
-    //Tar in en lista med prognosdata och hämtar ut en lista med 3-dagar prognosdata
+    //Get a list with forecast data and gets a list with a 3 day forcast
     public static ArrayList<Forecast> forecastDate(ArrayList<Forecast> forecasts) {
         ArrayList<Forecast> resultThreeDayForecast = new ArrayList<>();
 
@@ -67,7 +66,7 @@ public class JSONForecastParser {
         Date dateFirstForecast = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
-        //Konverterar första elementet dt_txt till Calendar format
+        //Converts the first element dt_text to Calendat format
         try {
             dateFirstForecast = format.parse(firstForecastDay);
             calForecastDay.setTime(dateFirstForecast);
@@ -86,9 +85,9 @@ public class JSONForecastParser {
         int numberOfDaysForecast = 3;
         int numberOfDaysCurrent = 0;
         int[] indexOfForecastDays = new int[3];
-
-        //Hämtar start-index för 3 dagar ur listan för att användas i huvudloopen
-        //så jag vet vilket index varje dag startar på
+        
+        //Get the start-index for 3 days from the list to be used in the main loop
+        //This is to know which index each day starts on
         while (numberOfDaysCurrent < numberOfDaysForecast) {
             for (int i = 0; i < forecasts.size(); i++) {
                 Date dateCurrent = new Date();
@@ -111,10 +110,11 @@ public class JSONForecastParser {
         }
 
         numberOfDaysCurrent = 0;
-
-        //huvudloopen för att hämta prognosdata för de 3 dagarna
+        
+        //The main loop to get forecast data for the first three days
         while (numberOfDaysCurrent < numberOfDaysForecast) {
-            //Gå igenom all prognosdata för att hämta prognos de 3 dagarna och sätta min och max temp.
+
+            //Go through all the forecast data to get the forecast for the three days, and set the min and max temp
             for (int i = indexOfForecastDays[numberOfDaysCurrent]; i < forecasts.size(); i++) {
                 Date dateCurrent = new Date();
                 String dtStart = forecasts.get(i).forecastCondition.getForecastDate();
@@ -128,14 +128,14 @@ public class JSONForecastParser {
                     e.printStackTrace();
                 }
 
-                //Sätt start min och max temp för startvärdet på den dag jag testar i while-loopen
+                //Set start min and max temp for the start value for the day I test in the while loop
                 if (i == indexOfForecastDays[numberOfDaysCurrent]) {
                     minTemp = forecasts.get(i).temperature.getTemperature();
                     maxTemp = forecasts.get(i).temperature.getTemperature();
                     lastIndexOfDay = indexOfForecastDays[numberOfDaysCurrent];
                 }
 
-                //Testar om jag fortfarande är på samma dag om inte hoppa ur loopen och räkna ev. upp till nästa dag
+                //Test if I still am on the same day, if not it goes out of the loop and count up to the next day
                 if (calForecastDay.compareTo(calCurrent) != 0) {
                     lastIndexOfDay = indexOfForecastDays[numberOfDaysCurrent];
                     break;
