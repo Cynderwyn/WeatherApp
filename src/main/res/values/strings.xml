@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Which Weather</string>
+    <string name="action_settings">Change Location</string>
+    <string name="place_not_found">Weather data not found</string>
+    <string name="welcome_title">WELCOME TO</string>
+    <string name="which_weather_caps">WHICH WEATHER</string>
+    <string name="which_weather_start_text">Shows weather and 3 day forecast for chosen location</string>
+    <string name="choose_location_start_text">Choose location by tapping the "Change Location" button in the top right corner</string>
+    <string name="copyright">WhichWeather © Copyright 2021</string>
+
+</resources>
+
+
