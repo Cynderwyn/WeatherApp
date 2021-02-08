@@ -2,7 +2,7 @@ package com.example.whichweather;
 
 import java.io.Serializable;
 
-//Innehåller placering och väderinformation för vald stad enligt JSON-strukturen
+//Includes the placement and weather information for a chosen city according to the JSON structure
 public class Location implements Serializable {
     private float longitude;
     private float latitude;
