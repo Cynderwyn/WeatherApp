@@ -18,19 +18,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            //Skapar upp ett nytt objekt av klassen WeatherFragment
+            //Creates a new object of the class WeatherFragment
             getSupportFragmentManager().beginTransaction().add(R.id.container, new WeatherFragment()).commit();
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //Den här metoden inflates the menu och lägger till object till action bar om den finns
+        //This method inflates the menu and adds object to the action bar if it exists
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
-    //Om användaren klickat på change location ska dialogrutan öppnas
+    //If the user has clicked the change location the dialog should open
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_settings) {
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    //Dialogrutan där användare kan skriva in vald stad
+    //The dialog where the user types in their chosen city
     private void showInputDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Change city");
@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         });
         builder.show();
     }
-
-    //Körs efter användaren valt en stad
+    
+    //Runs after the user has chosen a city
     public void changeCity(String city) {
         WeatherFragment wf = (WeatherFragment) getSupportFragmentManager().findFragmentById(R.id.container);
         wf.changeCity(city);
