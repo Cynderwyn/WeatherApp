@@ -19,7 +19,7 @@ public class WeatherFragment extends Fragment {
 
     Handler handler;
 
-    //Globala deklarationer för weather layout (Main layout)
+    //Global declarations for the weather layout (main layout)
     private ImageView weatherIcon;
     private TextView cityText;
     private TextView conditionDescription;
@@ -29,7 +29,7 @@ public class WeatherFragment extends Fragment {
     private TextView pressure;
     private TextView windSpeed;
 
-    //Globala deklarationer för forecast layout
+    //Global declarations for the forecast layout
     private ImageView forecastIcon1;
     private ImageView forecastIcon2;
     private ImageView forecastIcon3;
@@ -40,7 +40,7 @@ public class WeatherFragment extends Fragment {
     private TextView forecastTemp2;
     private TextView forecastTemp3;
 
-    //Globala deklarationer för de olika layout objekten
+    //Global declarations for the different layout objects
     private RelativeLayout mainLayout;
     private RelativeLayout forecastLayout;
     private RelativeLayout startLayout;
@@ -86,7 +86,7 @@ public class WeatherFragment extends Fragment {
         return rootView;
     }
 
-    //Hämtar väderdata från OpenWeatherMap med angiven stad
+    //Gets the weather data from OpenWeatherMap with the given city
     private void updateWeatherData(final String city) {
         new Thread() {
             public void run() {
@@ -110,8 +110,8 @@ public class WeatherFragment extends Fragment {
             }
         }.start();
     }
-
-    //Hämtar forecastdata från OpenWeatherMap med angiven stad
+    
+    //Gets the forecastdata from OpenWeatherMap with the given city
     private void updateForecastData(final String city) {
         new Thread() {
             public void run() {
@@ -137,7 +137,7 @@ public class WeatherFragment extends Fragment {
         }.start();
     }
 
-    //Skriver ut och fyller de olika objekten för det aktuella vädret i min layout
+    //Writes and fills the fdifferent object for the current value in the layout
     private void renderWeather(String json) {
 
         try {
@@ -163,7 +163,7 @@ public class WeatherFragment extends Fragment {
         }
     }
 
-    //Skriver ut och fyller de olika objekten för det kommande vädret i min layout
+    //Writes and fills the fdifferent object for the coming value in the layout
     private void renderForecast(String json) {
         try {
             ArrayList<Forecast> forecasts= JSONForecastParser.getForecast(json);
@@ -183,7 +183,7 @@ public class WeatherFragment extends Fragment {
         }
     }
 
-    //Sätter väderikonen
+    //Sets the weather icon
     private void setWeatherIcon(String iconString, ImageView conditionIcon) {
         switch (iconString) {
             case "01d":
