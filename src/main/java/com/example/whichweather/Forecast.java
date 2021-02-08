@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-//Håller aktuell väderprognos för vald placering enligt JSON-strukturen
+//Holds the current weather forecast for the chosen location according to the JSON structure
 public class Forecast {
 
     public Forecast.ForecastCondition forecastCondition = new Forecast.ForecastCondition();
@@ -18,7 +18,8 @@ public class Forecast {
         private long timeZone;
 
         public String getTimeDate() {
-            //Skriver ut datum och tid
+
+            //Forms the time and date
             long time = this.timeDate * (long) 1000;
             Date date = new Date(time);
             SimpleDateFormat sdf = new SimpleDateFormat("EEEE ");
@@ -28,9 +29,9 @@ public class Forecast {
 
             int timeAdjust = (int) this.timeZone / 3600;
 
-            Calendar cal = Calendar.getInstance();          //Skapar upp Calendar instans
-            cal.setTime(date);                              //Sätter Calendar time/date
-            cal.add(Calendar.HOUR_OF_DAY, timeAdjust);      //Lägger till en timme
+            Calendar cal = Calendar.getInstance();          //Creates a Calendar instance
+            cal.setTime(date);                              //Sets Calendar time/date 
+            cal.add(Calendar.HOUR_OF_DAY, timeAdjust);      //Adds a hour
 
             return sdf.format(cal.getTime());
         }
