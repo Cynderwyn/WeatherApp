@@ -6,14 +6,14 @@ import org.json.JSONObject;
 
 public class JSONWeatherParser {
 
-    //Tar JSON-datan, parsar den och lägger in den i ett objekt av klassen Weather
+    //Takes the JSON data, parses it and adds it in a object of the class Weather
     public static Weather getWeather(String data) throws JSONException {
         Weather weather = new Weather();
 
-        //Skapar upp ett JSON-Objekt från datan
+        //Creates a JSON object from the data
         JSONObject jsonObject = new JSONObject(data);
 
-        //Extraherar informationen
+        //Ectracts the information
         Location locations = new Location();
 
         JSONObject coordinatesObject = getObject("coord", jsonObject);
@@ -27,10 +27,10 @@ public class JSONWeatherParser {
         locations.setCity(getString("name", jsonObject));
         weather.location = locations;
 
-        //Tar in väder informationen, en array
+        //Gets the weather information, an array
         JSONArray jsonArray = jsonObject.getJSONArray("weather");
 
-        //Jag tar bara in och använder mig av första värdet
+        //I only take in and use the first weather
         JSONObject JSONWeather = jsonArray.getJSONObject(0);
         weather.currentCondition.setWeatherId(getInt("id", JSONWeather));
         weather.currentCondition.setDescription(getString("description", JSONWeather));
